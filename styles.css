@@ -82,4 +82,21 @@ table {
   padding: 24px;
   border-radius: 8px;
   height: 100%;
+  overflow-y: auto;
+}
+
+.todo-item {
+  padding: 4px;
+}
+
+.todo-item__text {
+  font-size: 1.2rem;
+}
+
+.todo-item__button {
+  margin-left: 6px;
+}
+
+.complete {
+  text-decoration: line-through;
 }

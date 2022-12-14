@@ -1,6 +1,7 @@
 const form = document.querySelector('.todo-input__form');
 const input = document.querySelector('.todo-input__text');
 const todoList = document.querySelector('.todo-content__list');
+const doneList = document.querySelector('.todo-complete__list');
 
 form.addEventListener('submit', onTodoSubmit);
 
@@ -26,33 +27,26 @@ function createTodo(text) {
   button.innerText = '완료!';
   todo.appendChild(span);
   todo.appendChild(button);
-
-  // button.addEventListener('click', (event) => {
-  //   console.log(span);
-  //   span.classList.add('complete');
-  // })
-
-  button.addEventListener('click', deleteTodo)
-
+  button.addEventListener('click', completeTodo)
   return todo;
 }
 
-function deleteTodo() {
-  console.log('delete');
+function completeTodo() {
   const parent = this.closest('li');
   const span = parent.firstChild;
   span.classList.add('complete');
   this.innerText = '되돌리기';
   this.addEventListener('click', redoTodo);
+  doneList.appendChild(parent);
 }
 
 function redoTodo() {
-  console.log('redo');
   const parent = this.closest('li');
   const span = parent.firstChild;
-  this.removeEventListener('click', deleteTodo);
+  this.removeEventListener('click', completeTodo);
   span.classList = ['todo-item__text'];
-  this.addEventListener('click', deleteTodo);
+  this.addEventListener('click', completeTodo);
   this.removeEventListener('click', redoTodo);
   this.innerText = '완료!';
+  todoList.appendChild(parent);
 }
